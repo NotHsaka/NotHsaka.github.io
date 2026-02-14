@@ -1,122 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stranger Things Watch Party?</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Press Start 2P', cursive;
-            text-align: center;
-            background: transparent;
-            color: #fff;
-            padding: 50px;
-            min-height: 100vh;
-            position: relative;
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, #000 0%, #111 50%, #000 100%);
-            z-index: -1;
-        }
-        h1 {
-            font-size: 1.5em;
-            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-            margin-bottom: 40px;
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        button {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1em;
-            padding: 15px 30px;
-            margin: 10px;
-            border: 2px solid #fff;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        #yesBtn {
-            background-color: #00ff00;
-            color: #000;
-            text-shadow: none;
-        }
-        #yesBtn:hover {
-            box-shadow: 0 0 20px #00ff00;
-        }
-        #noBtn {
-            background-color: #ff0000;
-            color: #fff;
-        }
-        #noBtn:hover {
-            box-shadow: 0 0 20px #ff0000;
-        }
-        .enlarged {
-            transform: scale(5);
-            animation: pulse 0.5s infinite alternate;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 20px #ff0000; }
-            100% { box-shadow: 0 0 40px #ff0000; }
-        }
-        .message {
-            display: none;
-            font-size: 1.2em;
-            margin-top: 40px;
-            text-shadow: 0 0 10px #00ff00;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's 🌻</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #fff9e6, #fff3b0);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Falling petals container */
+.petal {
+    position: fixed;
+    top: -10px;
+    font-size: 20px;
+    animation: fall linear infinite;
+    color: #ffd60a;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+h1 {
+    color: #d4a017;
+    font-size: 2.5rem;
+}
+
+p {
+    color: #444;
+    max-width: 400px;
+    margin: auto;
+}
+
+button {
+    margin-top: 25px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background-color: #ffd60a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s ease;
+}
+
+.popup.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.flower-box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    transform: scale(0.6);
+    transition: 0.4s ease;
+}
+
+.popup.active .flower-box {
+    transform: scale(1);
+}
+
+/* Sunflower */
+.sunflower-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+}
+
+.petals {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    animation: spin 6s linear infinite;
+}
+
+.petal-piece {
+    position: absolute;
+    width: 30px;
+    height: 70px;
+    background: #ffd60a;
+    border-radius: 50%;
+    top: 40px;
+    left: 60px;
+    transform-origin: center 40px;
+}
+
+.center {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: #5c3d00;
+    border-radius: 50%;
+    top: 40px;
+    left: 40px;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.close-btn {
+    margin-top: 20px;
+}
+</style>
 </head>
+
 <body>
-    <h1>Hey, want to watch Stranger Things together? 🛸</h1>
-    <div class="buttons">
-        <button id="yesBtn">Yes!</button>
-        <button id="noBtn">No</button>
+
+<div>
+    <h1>Happy Valentine's Day 💛</h1>
+    <p>
+        I made this sunflower because yellow reminds me of someone
+        cheerful, bright, and quietly amazing.
+    </p>
+    <button onclick="openPopup()">Click for your sunflower 🌻</button>
+</div>
+
+<div class="popup" id="popup">
+    <div class="flower-box">
+        <div class="sunflower-container">
+            <div class="petals" id="petals"></div>
+            <div class="center"></div>
+        </div>
+        <h2>You deserve something that never stops blooming 💛</h2>
+        <button class="close-btn" onclick="closePopup()">Close</button>
     </div>
-    <div id="message" class="message">
-        Thank you so much! You're the best! 💖<br>
-        Lika na dito sa Discord!
-    </div>
+</div>
 
-    <script>
-        const yesBtn = document.getElementById('yesBtn');
-        const noBtn = document.getElementById('noBtn');
-        const message = document.getElementById('message');
+<script>
+// Create spinning petals
+const petalsContainer = document.getElementById("petals");
 
-        yesBtn.addEventListener('click', () => {
-            // Hide buttons and show message
-            document.querySelector('.buttons').style.display = 'none';
-            message.style.display = 'block';
-        });
+for (let i = 0; i < 12; i++) {
+    const petal = document.createElement("div");
+    petal.className = "petal-piece";
+    petal.style.transform = rotate(${i * 30}deg);
+    petalsContainer.appendChild(petal);
+}
 
-        noBtn.addEventListener('click', () => {
-            // Make No button 5x bigger with pulsing effect
-            noBtn.classList.add('enlarged');
-            // After a short delay, change text to Yes
-            setTimeout(() => {
-                noBtn.textContent = 'Yes';
-                noBtn.id = 'yesBtn'; // Change ID to make it act like Yes
-                noBtn.style.backgroundColor = '#00ff00';
-                noBtn.style.color = '#000';
-                noBtn.classList.remove('enlarged');
-                // Add the Yes click event
-                noBtn.addEventListener('click', () => {
-                    // Hide buttons and show message
-                    document.querySelector('.buttons').style.display = 'none';
-                    message.style.display = 'block';
-                });
-            }, 1000); // 1 second delay
-        });
-    </script>
+// Popup functions
+function openPopup() {
+    document.getElementById("popup").classList.add("active");
+}
+
+function closePopup() {
+    document.getElementById("popup").classList.remove("active");
+}
+
+// Falling yellow petals animation
+function createFallingPetal() {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.innerHTML = "🌼";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (3 + Math.random() * 5) + "s";
+    petal.style.fontSize = (15 + Math.random() * 20) + "px";
+    document.body.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, 8000);
+}
+
+setInterval(createFallingPetal, 300);
+</script>
+
 </body>
 </html>
